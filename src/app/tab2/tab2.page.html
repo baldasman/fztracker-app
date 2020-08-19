@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">
+    Corpo de Fuzileiros
+    </ion-title>
+       <div class="on-off" ><ion-icon class="on-off" name="cloud-circle"></ion-icon></div> 
+     </ion-toolbar>
+   
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="face">
+    
+      <ion-card-title class="pad" style="text-align: center;">Aproxime o cartão</ion-card-title>
+  
+      <img src="/assets/default.jpg" id="pic" class="center" alt="" />
+      <!-- <img [src]="photo" alt="Sem imagem" id="pic" class="center" onerror="this.src='http://localhost:8100/assets/default.jpg';">
+     -->
+     <ion-grid >
+      <ion-row >
+         <ion-col >
+            <ion-card-content style="padding: 0px;">
+                <p id="polo" style="text-align: center;" ><b><h1>{{ rankName }} - {{ polo }} </h1></b></p>
+               <!-- {{ gdh }}-->
+            </ion-card-content >
+         </ion-col>
+        </ion-row >
+        <ion-row >
+          <ion-col >
+          <ion-card-content style="padding: 0px;">
+              <ion-list>
+                <ion-item>
+                  <ion-label>VIATURA</ion-label>
+                  <ion-select value="NOCAR" interface="action-sheet"> <!-- fazer com que o value ser igual à viatura do ultimo movimento -->
+                    <ion-select-option value="CAR1">AP2345</ion-select-option>
+                    <ion-select-option value="CAR2">AP7822</ion-select-option>
+                    <ion-select-option value="CAR3">34AA34</ion-select-option>
+                    <ion-select-option value="CAR4">2399FZ</ion-select-option>
+                    <ion-select-option value="NOCAR">Sem Viatura</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+          </ion-card-content>
+       </ion-col>
+      </ion-row >
+      </ion-grid>
+    </ion-card>
+ 
+    
+    <ion-card class="add">
+   
+      <ion-card-header class="add" style="padding: 0px;">
+         <div class="add">Adicionar </div>
+   
+      </ion-card-header>
+          <ion-card-content class="add" >
+  
+            <ion-grid class="add">
+              <ion-row>
+                <ion-col>
+                  <div class="ion-text-start">
+                    <ion-button  shape="round" color="success">Viatura</ion-button>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div class="ion-text-end">
+                    <ion-button  shape="round" color="success">Visitas </ion-button>
+                  
+                  </div>
+                </ion-col>
+                
+              </ion-row>
+            </ion-grid>
+  
+  <!--                   <ion-button (click)="logAccess('1')" color="success" style="align-items: center">viatura</ion-button>
+                <ion-button color="success" style="align-items: center">visita</ion-button> -->
+  
+        </ion-card-content>
+    </ion-card>
+   
+    <div class="send" style="text-align: center;"><ion-button  shape="round" expand="full" color="primary">Validar Saída </ion-button>
+      </div>
+    
+      
+  
+  
+  
+  </ion-content>
