@@ -4,6 +4,8 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Ndef, NFC } from '@ionic-native/nfc/ngx';
 import * as moment from 'moment';
 import * as Constants from '../services/constants';
+import { ModalController } from '@ionic/angular';
+import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +20,7 @@ export class Tab1Page {
   polo: string = "Polo";
   gdh: string = "---";
 
-  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private nativeStorage: NativeStorage) {
+  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private nativeStorage: NativeStorage, private modalCtrl: ModalController ) {
     /*this.nativeStorage.setItem('baseUrl', 'http://localhost:8000')
       .then(
         () => console.log('Stored item!'),
@@ -101,7 +103,16 @@ export class Tab1Page {
   }
 
 
+  async openModal() {
 
+    const modal = await this.modalCtrl.create({
+      component: DepositModalComponent
+
+
+    });
+
+    await modal.present();
+  }
 
 
 

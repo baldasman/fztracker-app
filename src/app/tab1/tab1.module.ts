@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, DepositModalComponent],
+  entryComponents:[DepositModalComponent]
 })
 export class Tab1PageModule {}
