@@ -3,7 +3,7 @@
     <ion-title class="title">
     Corpo de Fuzileiros
     </ion-title>
-       <div class="on-off" ><ion-icon class="on-off" name="cloud-circle"></ion-icon></div> 
+       <div class="on-off" ><ion-icon class="on-off" name="cloud-circle" id="onOff"></ion-icon></div> 
      </ion-toolbar>
    
 </ion-header>
@@ -13,8 +13,15 @@
   <ion-card class="face">
     
       <ion-card-title class="pad" style="text-align: center;">Aproxime o cartão ou insira codigo</ion-card-title>
-  
-      <img src='{{ photo }}' id="pic" class="center" alt="" />
+
+     
+        <ion-item style="padding-bottom: 5px;">
+                <ion-label>Número Cartao:</ion-label>
+                <ion-input type="text" id="add-cardNumber"></ion-input>
+                <ion-icon item-end name="search" (click)="findCardNumber()" color="primary"></ion-icon>
+           </ion-item> 
+
+        <img src='{{ photo }}' id="pic" class="center" alt="" />
       <!-- <img [src]="photo" alt="Sem imagem" id="pic" class="center" onerror="this.src='http://localhost:8100/assets/default.jpg';">
      -->
      
@@ -80,7 +87,7 @@
       </ion-card-content>
   </ion-card>
  
-  <div class="send" style="text-align: center;"><ion-button  shape="round" expand="full" color="primary">Validar entrada </ion-button>
+  <div class="send" style="text-align: center;"><ion-button  shape="round" expand="full" color="primary" (click)="AddMovement()">Validar entrada </ion-button>
     </div>
   
     

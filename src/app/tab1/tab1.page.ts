@@ -37,6 +37,8 @@ export class Tab1Page {
       );
       */
 
+
+
     this.nfc.addNdefListener(() => {
       console.log('successfully attached ndef listener');
     }, (err) => {
@@ -102,7 +104,7 @@ export class Tab1Page {
     })
   }
 
-
+//open modal add viatura
   async openModal() {
 
     const modal = await this.modalCtrl.create({
@@ -114,6 +116,21 @@ export class Tab1Page {
     await modal.present();
   }
 
+
+//adicionar movimento à base de dados 
+  AddMovement(){
+
+console.log("teste botão")
+  }
+
+
+  findCardNumber(){
+
+     
+    console.log("teste botão",CardFind )
+      }
+
+    
 
 
 

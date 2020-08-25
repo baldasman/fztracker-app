@@ -1,19 +1,19 @@
 <ion-header> 
   <ion-toolbar>
     <ion-title>Adicionar Viatura</ion-title>
-<ion-buttons slot="end">
-  <ion-buttons (click)="dismissModal()">Sair</ion-buttons>
-</ion-buttons>
+<ion-button slot="end">
+  <ion-button (click)="dismissModal()">Sair</ion-button>
+</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-label positiom="floating">Matricula</ion-label>
+    <ion-label position="floating">Matricula (exemplo - AA8811)</ion-label>
     <ion-input type="text"></ion-input>
   </ion-item>
 
-<ion-buttons expand="blocl" (click)="savePlate()" class="ion-margin-top">Guardar</ion-buttons>
+<ion-button shape="round" color="success" expand="block" (click)="savePlate()" class="ion-margin-top">Guardar</ion-button>
 
 
 </ion-content>
