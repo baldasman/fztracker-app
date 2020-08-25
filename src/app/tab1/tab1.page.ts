@@ -127,7 +127,7 @@ console.log("teste botão")
   findCardNumber(){
 
      
-    console.log("teste botão",CardFind )
+    console.log("teste botão" )
       }
 
     
