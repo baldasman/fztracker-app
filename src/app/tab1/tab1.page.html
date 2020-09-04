@@ -16,9 +16,10 @@
 
      
         <ion-item style="padding-bottom: 5px;">
-                <ion-label>Número Cartao:</ion-label>
-                <ion-input type="text" id="add-cardNumber"></ion-input>
-                <ion-icon item-end name="search" (click)="findCardNumber()" color="primary"></ion-icon>
+          <ion-label>Número Cartao:</ion-label>
+          <ion-input [(ngModel)]="ManualCardNumber"></ion-input>
+          <ion-icon item-end name="search" (click)="findCardNumber()" color="primary"></ion-icon>
+
            </ion-item> 
 
         <img src='{{ photo }}' id="pic" class="center" alt="" />
