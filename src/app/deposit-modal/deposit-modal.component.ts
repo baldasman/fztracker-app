@@ -17,7 +17,13 @@ export class DepositModalComponent {
 
 // Falta ligar a Mongo Para guardar viatura.
   savePlate() {
-console.log()
+    
+console.log("teste save")
+
+    var tex = getElementById("savelabel")
+    console.log(document.getElementById("searchTxt").value)  
+  
+
   }
   
 
