@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import * as Constants from '../services/constants';
 import { ModalController } from '@ionic/angular';
 import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
+import {NavController, AlertController} from 'ionic-angular';
 
 @Component({
   selector: 'app-tab1',
@@ -19,8 +20,11 @@ export class Tab1Page {
   rankName: string = "Posto e Nome";
   polo: string = "Polo";
   gdh: string = "---";
+  ManualCardNumber: string;
 
-  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private nativeStorage: NativeStorage, private modalCtrl: ModalController ) {
+
+
+  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private nativeStorage: NativeStorage, private modalCtrl: ModalController) {
     /*this.nativeStorage.setItem('baseUrl', 'http://localhost:8000')
       .then(
         () => console.log('Stored item!'),
@@ -104,6 +108,21 @@ export class Tab1Page {
     })
   }
 
+
+
+
+  findCardNumber() {
+    console.log(this.ManualCardNumber)
+
+  }
+
+
+
+
+
+
+
+
 //open modal add viatura
   async openModal() {
 
@@ -117,20 +136,17 @@ export class Tab1Page {
   }
 
 
-//adicionar movimento à base de dados 
+  //adicionar movimento à base de dados 
   AddMovement(){
 
-console.log("teste botão")
-  }
-
-
-  findCardNumber(){
-
-     
-    console.log("teste botão" )
+  console.log("teste botão")
       }
 
-    
+
+
+
+
+
 
 
 
@@ -138,3 +154,5 @@ console.log("teste botão")
 
 
 }
+
+

@@ -10,10 +10,9 @@
 <ion-content class="ion-padding">
   <ion-item>
     <ion-label position="floating">Matricula (exemplo - AA8811)</ion-label>
-    <ion-input type="text" id="savelabel"></ion-input>
+    
+    <ion-input [(ngModel)]="AddNewPlate" type="text"></ion-input>
   </ion-item>
-  
-  
 
 <ion-button shape="round" color="success" expand="block" (click)="savePlate()" class="ion-margin-top">Guardar</ion-button>
 

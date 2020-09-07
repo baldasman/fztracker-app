@@ -8,6 +8,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class DepositModalComponent {
 
+  AddNewPlate: string;
+
+
   constructor(private modalCtrl: ModalController) { }
 
   dismissModal() {
@@ -17,14 +20,10 @@ export class DepositModalComponent {
 
 // Falta ligar a Mongo Para guardar viatura.
   savePlate() {
-    
-console.log("teste save")
+console.log(this.AddNewPlate)
 
-    var tex = getElementById("savelabel")
-    console.log(document.getElementById("searchTxt").value)  
-  
 
+alert('VIATURA  ' + this.AddNewPlate + '    Adicionada' )
   }
   
-
 }
