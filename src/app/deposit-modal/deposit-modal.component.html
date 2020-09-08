@@ -1,6 +1,6 @@
 <ion-header> 
   <ion-toolbar>
-    <ion-title>Adicionar Viatura</ion-title>
+    <ion-title>Adicionar </ion-title>
 <ion-button slot="end">
   <ion-button (click)="dismissModal()">Sair</ion-button>
 </ion-button>
@@ -9,11 +9,23 @@
 
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-label position="floating">Matricula (exemplo - AA8811)</ion-label>
-    
+    <!-- <ion-label position="floating">Matricula (exemplo - AA8811) -->
+      <ion-select [(ngModel)]="getSelectedSubject" (ionChange)="getSelectedSubjectValue(getSelectedSubject)" [interfaceOptions]="customAlertOptions" interface="dropdown">
+       <label>teste de etiqueta</label>
+        <ion-select-option  value="Viatura" >Viatura</ion-select-option >
+        <ion-select-option  value="Visita" >Visita</ion-select-option >
+        <ion-select-option  value="Nota" >Observações</ion-select-option >
+        
+      </ion-select>
+    <!-- </ion-label> -->
+   
     <ion-input [(ngModel)]="AddNewPlate" type="text"></ion-input>
   </ion-item>
+  <div class="labelhelp">
+    <ion-label color="primary" >{{LabelHelp}}</ion-label>
 
+  </div>
+ 
 <ion-button shape="round" color="success" expand="block" (click)="savePlate()" class="ion-margin-top">Guardar</ion-button>
 
 
