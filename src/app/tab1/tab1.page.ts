@@ -21,6 +21,7 @@ export class Tab1Page {
   polo: string = "Polo";
   gdh: string = "---";
   ManualCardNumber: string="Numero Cartão";
+  color: string =""
 
 
 
@@ -140,11 +141,12 @@ export class Tab1Page {
       async ManualNumberCard() {  
 
         this.ManualCardNumber = "Numero Cartão"
+        this.color=""
 
         const prompt = await this.alertCtrl.create({  
         
-          header: 'Número do Cartao',  
-          message: 'Introduz o numero do cartão',  
+          header: 'Número do Cartão',  
+          message: 'Introduz o número do cartão',  
           inputs: [   
             {  
               name: 'cardnumber',  
@@ -165,7 +167,7 @@ export class Tab1Page {
               text: 'Salvar',  
               handler: data => {  
                 console.log();  
-                if(data.cardnumber.length != 5 ) {this.ManualCardNumber = data.cardnumber.toUpperCase()}
+                if(data.cardnumber.length != 5 ) {this.ManualCardNumber = "Número inválido!"; this.color="danger"}
                 if(data.cardnumber != "" && data.cardnumber.length == 5 ) {this.ManualCardNumber = data.cardnumber.toUpperCase()};
               
 
