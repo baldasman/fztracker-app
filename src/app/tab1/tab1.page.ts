@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import * as Constants from '../services/constants';
 import { ModalController } from '@ionic/angular';
 import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
-import {NavController, AlertController} from 'ionic-angular';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -20,11 +20,11 @@ export class Tab1Page {
   rankName: string = "Posto e Nome";
   polo: string = "Polo";
   gdh: string = "---";
-  ManualCardNumber: string;
+  ManualCardNumber: string="Numero Cartão";
 
 
 
-  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private nativeStorage: NativeStorage, private modalCtrl: ModalController) {
+  constructor(public alertCtrl: AlertController, public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private nativeStorage: NativeStorage, private modalCtrl: ModalController) {
     /*this.nativeStorage.setItem('baseUrl', 'http://localhost:8000')
       .then(
         () => console.log('Stored item!'),
@@ -111,15 +111,7 @@ export class Tab1Page {
 
 
 
-  findCardNumber() {
-    console.log(this.ManualCardNumber)
-
-  }
-
-
-
-
-
+  
 
 
 
@@ -144,6 +136,46 @@ export class Tab1Page {
 
 
 
+
+      async ManualNumberCard() {  
+
+        this.ManualCardNumber = "Numero Cartão"
+
+        const prompt = await this.alertCtrl.create({  
+        
+          header: 'Número do Cartao',  
+          message: 'Introduz o numero do cartão',  
+          inputs: [   
+            {  
+              name: 'cardnumber',  
+              type: 'text', 
+              placeholder: 'exemplo M0023'  
+            },  
+             
+          ],  
+          buttons: [  
+            {  
+              text: 'Sair',  
+              handler: data => {  
+                console.log('Sair');  
+
+              }  
+            },  
+            {  
+              text: 'Salvar',  
+              handler: data => {  
+                console.log();  
+                if(data.cardnumber.length != 5 ) {this.ManualCardNumber = data.cardnumber.toUpperCase()}
+                if(data.cardnumber != "" && data.cardnumber.length == 5 ) {this.ManualCardNumber = data.cardnumber.toUpperCase()};
+              
+
+              }  
+            }  
+          ]  
+        });  
+        await prompt.present();  
+
+      }
 
 
 
