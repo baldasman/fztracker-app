@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { EntityMovementModel } from '../models/entity-movement.model';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -25,8 +26,8 @@ export class ApiService {
     return this.httpClient.get(environment.api + '/fztracker/entities/v1', options);
   }
   
-  createMovement(movement: {location: string, cardNumber: string, inOut: boolean, sensor?: string, cardId?: string, manual?: boolean}): Observable<object> {
-    console.log('createMovement:', movement);
+  addMovement(movement: EntityMovementModel): Observable<object> {
+    console.log('addMovement:', movement);
 
     let options = { headers: this.headers };
     

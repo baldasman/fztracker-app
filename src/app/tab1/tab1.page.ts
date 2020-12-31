@@ -5,6 +5,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
+import { EntityMovementModel } from '../models/entity-movement.model';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
+  cardNumber: string = null;
   photo: string = "/assets/default.jpg";
   rankName: string = "Posto e Nome";
   polo: string = "Polo";
@@ -32,20 +33,19 @@ export class Tab1Page {
     private modalCtrl: ModalController,
     private apiService: ApiService
   ) {
-    /*this.nativeStorage.setItem('baseUrl', 'host....')
+    // TODO: move to config save
+    this.nativeStorage.setItem('sensorId', 'PHONE_1'/* variable */)
       .then(
-        () => console.log('Stored item!'),
-        error => console.error('Error storing item', error)
+        () => console.log('Stored sensorId', 'PHONE_1'/* variable */),
+        error => console.error('Error storing location', error)
       );
 
-    this.nativeStorage.getItem('baseUrl')
+    this.nativeStorage.setItem('location', 'CF'/* variable */)
       .then(
-        data => {
-          console.log('read baseUrl from storage', data)
-        },
-        error => console.error(error)
+        () => console.log('Stored location', 'CF'/* variable */),
+        error => console.error('Error storing location', error)
       );
-      */
+    // end
 
     this.nfc.addNdefListener(() => {
       console.log('successfully attached ndef listener');
@@ -75,24 +75,48 @@ export class Tab1Page {
   }
 
   logAccess(cardId: any) {
-    const movement = {
-      location: "123456789",
-      cardNumber: "M0001",
-      inOut: false,
-      sensor: "123456789",
-      cardId: cardId,
-      manual: false,
-    };
+    // Get location
+    let location = 'LOCAL';
+    this.nativeStorage.getItem('location')
+     .then(
+       data => {
+         console.log('read location from storage', data);
 
-    const card = this.apiService.createMovement(movement);
+         if (data) {
+           location = data;
+         }
+       },
+       error => console.error(error)
+     );
+    
+     // Get sensorId
+    let sensorId = 'BROWSER';
+     this.nativeStorage.getItem('sensorId')
+     .then(
+       data => {
+         console.log('read sensorId from storage', data);
+
+         if (data) {
+          sensorId = data;
+         }
+       },
+       error => console.error(error)
+     );
+
+    const movement = new EntityMovementModel();
+    movement.location = location;
+    movement.manual = true;
+    movement.cardNumber = this.cardNumber;
+    movement.inOut = true;
+    movement.sensor = sensorId;
+    movement.cardId = cardId;
+    movement.plate = this.selectedResource;
+
+    const card = this.apiService.addMovement(movement);
     card.subscribe(response => {
       const data: any = response;
-      console.log('my data: ', data);
+      console.log('movement: ', data);
 
-      //ver isto !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-      this.photo = `${environment.api}/assets/photos/${data.entity.permanent.serial}.jpg`;
-      this.rankName = `${data.entity.nopermanent.rank} ${data.entity.permanent.name}`;
-      this.polo = data.entity.nopermanent.polo;
       this.gdh = `${data.entity.inOut ? "Entrada" : "Saída"} às ${moment(data.entity.lastMovementDate).format("DD-MM-YYYY HH:mm")}`;
 
       this.changeRef.detectChanges();
@@ -100,7 +124,6 @@ export class Tab1Page {
       console.error('[ACCESS]', error);
     });
   }
-
 
   //open modal add viatura
   async openModal() {
@@ -119,20 +142,16 @@ export class Tab1Page {
     }
   }
 
-
   //adicionar movimento à base de dados 
   AddMovement() {
-
-    console.log("teste botão")
+    this.logAccess(null);
   }
-
-
-
 
   async ManualNumberCard() {
 
-    this.ManualCardNumber = "Numero Cartão"
-    this.color = ""
+    this.ManualCardNumber = "Numero Cartão";
+    this.cardNumber = null;
+    this.color = "";
 
     const prompt = await this.alertCtrl.create({
 
@@ -159,6 +178,7 @@ export class Tab1Page {
           handler: data => {
             if (data.cardnumber.length != 5) {
               this.ManualCardNumber = "Número inválido!";
+              this.cardNumber = null;
               this.color = "danger";
 
               return;
@@ -171,6 +191,7 @@ export class Tab1Page {
 
               if (rawData.data.records < 1) {
                 this.ManualCardNumber = "Número inválido!";
+                this.cardNumber = null;
                 this.color = "danger";
 
                 this.changeRef.detectChanges();
@@ -181,6 +202,7 @@ export class Tab1Page {
               console.log('my card: ', entity);
 
               this.ManualCardNumber = entity.cardNumber;
+              this.cardNumber = entity.cardNumber;
               this.photo = `${environment.api}/assets/userPhotos/${entity.permanent.serial}.bmp`;
               this.rankName = `${entity.nopermanent.rank} ${entity.permanent.name}`;
               this.polo = entity.nopermanent.location;
@@ -202,6 +224,7 @@ export class Tab1Page {
               console.error('[CARD]', error);
 
               this.ManualCardNumber = "Número inválido!";
+              this.cardNumber = null;
               this.color = "danger";
 
               this.changeRef.detectChanges();
@@ -213,16 +236,6 @@ export class Tab1Page {
 
     await prompt.present();
   }
-
-
-
-
-
-
-
-
-
-
 }
 
 
