@@ -2,26 +2,19 @@
   <ion-toolbar>
     <ion-title class="title">
       Corpo de Fuzileiros
+      <ion-icon [ngClass]="{'connected': this.connected, 'disconnected': !this.connected}" name="cloud-circle" id="onOff"></ion-icon>
     </ion-title>
-    <div class="on-off">
-      <ion-icon class="on-off" name="cloud-circle" id="onOff"></ion-icon>
-    </div>
+    
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="face">
-
   <ion-card class="face">
-
     <ion-card-title class="pad" style="text-align: center;">Aproxime o cartão ou insira codigo</ion-card-title>
 
-
     <ion-item style="padding-bottom: 5px;">
-
-      <ion-label class="ion-text-center" color="{{color}}">{{ManualCardNumber}}</ion-label>
-      <ion-icon item-end name="search" (click)="ManualNumberCard()" color="primary"></ion-icon>
-
+      <ion-label class="ion-text-center" color="{{color}}">{{ cardInfo }}</ion-label>
+      <ion-icon item-end name="search" (click)="searchCardByNumber()" color="primary"></ion-icon>
     </ion-item>
 
     <img [src]="photo" alt="Sem imagem" id="pic" class="center" onerror="this.src='/assets/default.jpg';" />
@@ -90,6 +83,6 @@
   </ion-card>
 
   <div class="send" style="text-align: center;">
-    <ion-button shape="round" expand="full" color="primary" (click)="AddMovement()">Validar entrada </ion-button>
+    <ion-button shape="round" expand="full" color="primary" (click)="logAccess()">Validar entrada </ion-button>
   </div>
 </ion-content>

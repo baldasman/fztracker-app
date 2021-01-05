@@ -38,9 +38,20 @@ padding-right: 0px;
 
 };
 
-.on-off{
+.disconnected { 
   color:red;
   text-align: right;
+
+  width: 0.7em;
+  height: 0.7em;
+};
+
+.connected {
+  color:green;
+  text-align: right;
+  
+  width: 0.7em;
+  height: 0.7em;
 };
 
 .centro {
