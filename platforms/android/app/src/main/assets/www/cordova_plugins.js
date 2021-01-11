@@ -293,6 +293,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
+      "id": "cordova-sqlite-storage.SQLitePlugin",
+      "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+      "pluginId": "cordova-sqlite-storage",
+      "clobbers": [
+        "SQLitePlugin"
+      ]
+    },
+    {
       "id": "cordova-plugin-nativestorage.mainHandle",
       "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
       "pluginId": "cordova-plugin-nativestorage",
@@ -321,6 +329,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-advanced-http": "2.4.0",
+    "cordova-sqlite-storage": "5.0.1",
     "cordova-plugin-nativestorage": "2.3.2"
   };
 });
