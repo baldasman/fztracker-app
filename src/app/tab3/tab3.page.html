@@ -1,8 +1,8 @@
-<ion-content  class="ion-padding">
-  <form  id="122" #form="ngForm" (ngSubmit)="login(form)">
+<ion-content class="ion-padding">
+  <form id="122" #form="ngForm" (ngSubmit)="login(form)">
     <ion-grid>
       <ion-row color="primary" class="ion-justify-content-center">
-        <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12" >
+        <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
           <div class="ion-text-center">
             <h3>Login</h3>
           </div>
@@ -24,43 +24,49 @@
 
 
 
-<form (ngSubmit)="saveMovel()" id="123">
+  <form (ngSubmit)="saveMovel()" id="123">
 
     <ion-grid>
       <ion-row color="primary" class="ion-justify-content-center">
         <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
-            
-        <ion-item>
-              <ion-label>Local</ion-label>
-              <ion-select name="local" value="CF-Alfeite" okText="ok" cancelText="sair"  [(ngModel)]="todo.local">
-                  <ion-select-option value="CF-Alfeite">CF-Alfeite</ion-select-option>
-                  <ion-select-option value="CF-Escola">CF-Escola</ion-select-option>
-             </ion-select>
 
-           </ion-item>
-            <ion-item>
+          <ion-item>
+            <ion-label>Local</ion-label>
+            <ion-select name="local" value="CF-Alfeite" okText="ok" cancelText="sair" [(ngModel)]="todo.local">
+              <ion-select-option value="CF-Alfeite">CF-Alfeite</ion-select-option>
+              <ion-select-option value="CF-Escola">CF-Escola</ion-select-option>
+            </ion-select>
+
+          </ion-item>
+          <ion-item>
             <ion-label>Nome do dispoditivo</ion-label>
-            <ion-input name="movel" type="text" placeholder="ex. Movel1"   [(ngModel)]="todo.movelName" required></ion-input>
-           </ion-item>
-            <ion-item style="padding-top:20px">
-            <ion-input name="mail" type="email" placeholder="email"  [(ngModel)]="todo.mail" required></ion-input>
-            </ion-item>
+            <ion-input name="movel" type="text" placeholder="ex. Movel1" [(ngModel)]="todo.movelName" required>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>IP API</ion-label>
+            <ion-input name="movel" type="text" placeholder="xxx.xxx.xxx.xxx" [(ngModel)]="todo.movelName" required>
+            </ion-input>
+          </ion-item>
+          <ion-item style="padding-top:20px">
+            <ion-input name="mail" type="email" placeholder="email" [(ngModel)]="todo.mail" required></ion-input>
+          </ion-item>
 
-            <ion-item>
-            <ion-input name="pass" type="password" placeholder="Password"   [(ngModel)]="todo.pass" required></ion-input>
-            </ion-item>
-            <div class="ion-padding">
+          <ion-item>
+            <ion-input name="pass" type="password" placeholder="Password" [(ngModel)]="todo.pass" required></ion-input>
+          </ion-item>
+          <div class="ion-padding">
             <ion-button size="large" type="submit" (click)="saveMovel()" expand="block">Login</ion-button>
-            </div>
+          </div>
 
-      </ion-col>
-     </ion-row>
-      
-  </ion-grid>
+        </ion-col>
+      </ion-row>
 
-
+    </ion-grid>
 
 
-</form>
+
+
+  </form>
 
 </ion-content>
