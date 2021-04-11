@@ -17,7 +17,8 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    
   ],
   providers: [
     NativeStorage,

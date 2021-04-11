@@ -603,7 +603,7 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClientModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["BrowserModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["IonicModule"].forRoot(),
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_10__["AppRoutingModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_10__["AppRoutingModule"],
             ],
             providers: [
                 _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_5__["NativeStorage"],
@@ -636,7 +636,7 @@ __webpack_require__.r(__webpack_exports__);
 // alterar o token e o IP da Maquina.
 var environment = {
     production: false,
-    api: 'http://192.168.1.184:8000',
+    api: 'http://192.168.1.102:8000',
     token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoSWQiOiJtZUBmenRyYWNrZXIubG9jYWwiLCJzZXNzaW9uSWQiOiI5M2UzZDA1MC02NDg5LTExZWItODljYy1iMTk3MDAwNTIxNGIiLCJzZXNzaW9uVHlwZSI6InBvcnRhbCIsIm51bWJlck9mTG9naW5zIjoyOCwibGFzdExvZ2luRGF0ZSI6MTYxMjE4Mjc2MiwidHRsIjoxNzI4MDAsImNyZWF0ZWRBdCI6MTYxMjE4Mjc2MiwiaWF0IjoxNjEyMTgyNzYxfQ.NXXXj7mD3cFxXqylaB-9NRpnFm5ERtPXAQqnMd1yzbkNOaexQ7NvsU3TeUshnoq_8kQHi9G6aEEQscUncXBo3LTJ0DK7JoZEVLoqpo8QkKCQMUMm1HLxwnYMNMPZPpHMbZZidKUvb07RZ1k7pAgspKYlzJrmITaFyVSxcipQN2dpgNdy7vbbMwKaresyxF_2NYFG8oz5X2PsAC17VlPLmJW9ZOdwk21NRROB0yyUA6u-7ysqWcrG_ZQF8tsbCZlM8xjDP2UnSCtUQsep-_ZbxjXwNpyNS24sZKEILCrh9g4nrJnAMxAhw-aKaWA2LJBxPnxi95i_fOuboH1aShzJbS7rny96fb1g9ae8yFDPQJujB3rIEg9AmuNbsftxWdLAhx2O7EsPPcW7pFAnPAMaIwRPJBalUEL3wzCz8Iuietu11XjHMB9dePmpuq4neDYypz6Dj-cCCCZSfvPH38aGIvJmruo70JGmSjuG_Io-k5zHeYzN_GJtK-srIsgcAReLMY6HIiLUjyTlHR27_ULCGvyHWT-qlMBzQi8qg0pXA2yqAIo5AQ0vj-fkeuJJwNJLfBg77AwjH6qrpFon2ZSaEStRmrlr_rW4Nl7KcuS-usfRdx4Ke6RFluQXSwRLUKprAwm5mak8eUIVy2NQNsRbI6a5tE0AuCuAd7iCGtchbN0'
 };
 
@@ -676,7 +676,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\spy\Documents\GitHub\fztracker-app\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\tfuzo\OneDrive\Documents\GitHub\fztracker-app\src\main.ts */"./src/main.ts");
 
 
 /***/ })

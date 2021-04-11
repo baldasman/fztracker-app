@@ -679,6 +679,111 @@ const findCheckedOption = (el, tagName) => {
 
 
 
+/***/ }),
+
+/***/ "./src/app/services/api.service.ts":
+/*!*****************************************!*\
+  !*** ./src/app/services/api.service.ts ***!
+  \*****************************************/
+/*! exports provided: ApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiService", function() { return ApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+
+
+
+
+
+
+let ApiService = class ApiService {
+    constructor(httpClient, nativeStorage) {
+        this.httpClient = httpClient;
+        this.nativeStorage = nativeStorage;
+        this.connected = false;
+        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
+        this.statusTimer = null;
+        this.headers = this.headers.append('Content-Type', 'application/json');
+        this.headers = this.headers.append('Accept', 'application/json');
+        this.headers = this.headers.append('Authorization', 'Bearer ' + src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token);
+        this.checkStatus();
+        console.log('setup status timer');
+        this.statusTimer = setInterval(() => { this.checkStatus(); }, 30000);
+        this.nativeStorage.getItem("config").then(data => {
+            console.log('get iten config', data);
+            if (data) {
+                const config = JSON.parse(data);
+                src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api = config.ip;
+                console.log('update ip', src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api);
+            }
+            ;
+        }, error => console.error(error));
+        this.nativeStorage.getItem("token").then(data => {
+            console.log('get iten token', data);
+            if (data) {
+                src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token = data;
+                console.log('update token', src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token);
+            }
+            ;
+        }, error => console.error(error));
+    }
+    getCardInfo(cardNumber, cardId) {
+        console.log('getCardInfo:', cardNumber);
+        let params = {};
+        if (cardNumber) {
+            params = Object.assign({}, params, { cardNumber });
+        }
+        if (cardId) {
+            params = Object.assign({}, params, { cardId });
+        }
+        let options = {
+            headers: this.headers,
+            params
+        };
+        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/fztracker/entities/v1', options);
+    }
+    addMovement(movement) {
+        console.log('addMovement:', movement);
+        let options = { headers: this.headers };
+        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/fztracker/entities/v1/movement', movement, options);
+    }
+    signIn(username, password) {
+        // const url = new UrlModel(this.apiUrl).setPath('auth/v1/signin');
+        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/auth/v1/signin', { authId: username, password, sessionType: 'portal' })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((response) => response.data));
+    }
+    checkStatus() {
+        console.log('checkStatus', new Date());
+        let options = {
+            headers: this.headers
+        };
+        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/admin/status', options).subscribe(response => {
+            console.log('STATUS: OK');
+            this.connected = true;
+        }, error => {
+            console.error('STATUS: DEAD');
+            this.connected = false;
+        });
+    }
+};
+ApiService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] }
+];
+ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({ providedIn: 'root' }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])
+], ApiService);
+
+
+
 /***/ })
 
 }]);
