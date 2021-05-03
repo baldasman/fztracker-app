@@ -69,7 +69,7 @@ export class Tab1Page {
 
       // Search card by id
       this.cardId = this.nfc.bytesToHexString(event.tag.id);
-      this.cardNumber = null;
+     // this.cardNumber = null;
     //  this.cardId = '0412FD1AE66C81';
     console.log('nfc', this.cardId);
       this.searchCard();
@@ -99,7 +99,7 @@ export class Tab1Page {
   }
 
   async searchCardByNumber() {
-    this.cardNumber = null;
+    this.cardNumber = "0";
     this.cardId = null;
     this.color = "";
 
@@ -151,19 +151,20 @@ export class Tab1Page {
       if (rawData.data.records < 1) {
         this.cardInfo = "Número inválido!";
         this.color = "danger";
-        this.cardNumber = null;
-        this.cardId = null;
+       // this.cardNumber = null;
+       // this.cardId = null;
 
         this.changeRef.detectChanges();
         return;
       }
 
       const entity = rawData.data.entities[0];
+      console.log('a entidade' +entity)
       this.cardInfo = entity.cardNumber;
       this.color = '';
-      this.photo = `${environment.api}/assets/userPhotos/${entity.permanent.serial}.bmp`;
-      this.rankName = `${entity.nopermanent.rank} ${entity.permanent.name}`;
-      this.polo = entity.nopermanent.location;
+      this.photo = `${environment.api}/assets/userPhotos/${entity.serial}.bmp`;
+      this.rankName = `${entity.name}`;
+      //this.polo = entity.location;
 
       // Load plates
       if (entity.resources) {
