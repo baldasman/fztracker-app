@@ -66,15 +66,16 @@ export class ApiService {
 
   setToken(token: string) {
     this.token = token;
-    this.headers.set('Authorization', 'Bearer ' + this.token);
+
+    this.setHeaders();
   }
 
   setApi(api: string) {
     this.api = api;
   }
 
-  getApi() { 
-    return this.api; 
+  getApi() {
+    return this.api;
   }
 
   getCardInfo(cardNumber: string, cardId: string): Observable<object> {
@@ -113,7 +114,6 @@ export class ApiService {
         map((response: { data: any }) => response.data)
       );
   }
-
 
   private checkStatus() {
     console.log('checkStatus', new Date());
