@@ -175,40 +175,12 @@ export class Tab1Page {
   }
 
   private logAccess() {
-    // Get location
-    let location = 'LOCALX';
-    this.nativeStorage.getItem('location')
-      .then(
-        data => {
-          console.log('read location from storage', data);
-
-          if (data) {
-            location = data;
-          }
-        },
-        error => console.error(error)
-      );
-
-    // Get sensorId
-    let sensorId = 'BROWSER';
-    this.nativeStorage.getItem('sensorId')
-      .then(
-        data => {
-          console.log('read sensorId from storage', data);
-
-          if (data) {
-            sensorId = data;
-          }
-        },
-        error => console.error(error)
-      );
-
     const movement = new EntityMovementModel();
-    movement.location = location;
+    movement.location = this.apiService.getLocation();
     movement.manual = true;
     movement.cardNumber = this.cardNumber;
     movement.inOut = true;
-    movement.sensor = sensorId;
+    movement.sensor = this.apiService.getSensorId();
     movement.cardId = this.cardId;
     movement.plate = this.selectedResource;
 

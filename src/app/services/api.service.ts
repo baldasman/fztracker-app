@@ -84,6 +84,14 @@ export class ApiService {
   getApi() {
     return this.api;
   }
+  
+  getLocation() {
+    return this.location;
+  }
+  
+  getSensorId() {
+    return this.sensorId;
+  }
 
   getCardInfo(cardNumber: string, cardId: string): Observable<object> {
     console.log('getCardInfo:', cardNumber);
