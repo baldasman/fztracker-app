@@ -44,13 +44,11 @@ export class Tab3Page {
 
 
       setTimeout(function () {
-        console.log("agora")
-
         document.getElementById('123').hidden = true;
         document.getElementById('122').hidden = false;
         form.reset();
 
-      }, 30000);
+      }, 300000);
     };
   }
 
@@ -68,7 +66,7 @@ export class Tab3Page {
     const info = await this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise();
 
     this.apiService.setToken(info.token);
-    
+
     this.nativeStorage.setItem("token", info.token).then(
       () => console.log('Stored item!', info),
       error => console.error('Error storing item', error, info)
