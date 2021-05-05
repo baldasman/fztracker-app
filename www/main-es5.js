@@ -635,9 +635,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 // alterar o token e o IP da Maquina.
 var environment = {
-    production: false,
+    production: true,
     api: 'http://10.45.212.12:8000',
-    token: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoSWQiOiJtbUBzYXBvLnB0Iiwic2Vzc2lvbklkIjoiYTI5ODIxYTAtYTE2NS0xMWViLTkwM2YtNzU1NTNlMGQ0MTdiIiwic2Vzc2lvblR5cGUiOiJ1c2VyIiwibnVtYmVyT2ZMb2dpbnMiOjUsImxhc3RMb2dpbkRhdGUiOjE2MTg4NzQzNDYsInR0bCI6MTcyODAwLCJjcmVhdGVkQXQiOjE2MTg4NzQzNDYsImlhdCI6MTYxODg3NDM0NX0.WGnoIg9EN_7232UisrOxZ5jWXensYbJsK9JxZhCKCVDImZwju3wR3DKUo3Chqf5I7CDntNzYfl3h6GfyiqTti34iNx487c5R6283imSrfRxSHwq-QY1f837aYca7TaRu4u-RI7yHvq8cMCfV74wb-NEMOrCtpB2joWBKSDgTs5rfk35-U25cDWmSdLbFI3acXEXdxz-JlvO2SxVbG9hfg9JCUPg9Df4qCzmLoJcUj6s_xP2DsHspA8Xi5T47GBDOWVjNQ9iqkrYm7ssJVRZFnUwsK5_pxgiUDjzaIedCxWScR6V8vMVc8J3_fmNGta_Nod9J_6ZgiGXEEQL9B7roKw9ft74fcHUYsMYIUIVpqjuJ-37VW0iiVkHRRhyJaaY2sDUyZI8wbHLiUJltrNYJWdkmpK-3G-TULeFhRR0URm91qAgbbth4J6zi-PHqHpXR2dZbjePSkaKNa_ZHzbv4mKQ6JVc9feLBDBtXBE22lfYOKzPBEFd5W8ZdaseAzErQh4jh9yDmgfVydms4EL28UJgThfG1LC1WPPC1gNFbSVmIlLr2I6pl9wgSgwPOfl-e4dnmyrcveESBwvVhtDvoZgP80AXnJdgXsAC6F_-kx9imJOHBKkkN-2QJfi9mNHahttUSKDETzHkT8bfkeOFu36Or5ElNQHizev-r5RpLj2A'
+    token: ''
 };
 
 

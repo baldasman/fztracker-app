@@ -144,7 +144,7 @@ var Tab3Page = /** @class */ (function () {
                         return [4 /*yield*/, this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise()];
                     case 1:
                         info = _a.sent();
-                        src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].token = info.token;
+                        this.apiService.setToken(info.token);
                         this.nativeStorage.setItem("token", info.token).then(function () { return console.log('Stored item!', info); }, function (error) { return console.error('Error storing item', error, info); });
                         return [2 /*return*/];
                 }
