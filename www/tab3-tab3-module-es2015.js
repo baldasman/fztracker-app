@@ -113,19 +113,18 @@ let Tab3Page = class Tab3Page {
                     ;
                 }, error => console.error(error));
                 setTimeout(function () {
-                    console.log("agora");
                     document.getElementById('123').hidden = true;
                     document.getElementById('122').hidden = false;
                     form.reset();
-                }, 30000);
+                }, 300000);
             }
             ;
         });
     }
     saveMovel() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.apiService.setApi(this.todo.ip);
             console.log("teste salvar", this.todo);
+            this.apiService.setConfig(this.todo);
             // utilizar estes dados para cadastrar equipamento  e guardar local de registo. 
             this.nativeStorage.setItem("config", JSON.stringify(this.todo)).then(() => console.log('Stored item!'), error => console.error('Error storing item', error));
             const info = yield this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise();

@@ -118,11 +118,10 @@ var Tab3Page = /** @class */ (function () {
                         ;
                     }, function (error) { return console.error(error); });
                     setTimeout(function () {
-                        console.log("agora");
                         document.getElementById('123').hidden = true;
                         document.getElementById('122').hidden = false;
                         form.reset();
-                    }, 30000);
+                    }, 300000);
                 }
                 ;
                 return [2 /*return*/];
@@ -135,8 +134,8 @@ var Tab3Page = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.apiService.setApi(this.todo.ip);
                         console.log("teste salvar", this.todo);
+                        this.apiService.setConfig(this.todo);
                         // utilizar estes dados para cadastrar equipamento  e guardar local de registo. 
                         this.nativeStorage.setItem("config", JSON.stringify(this.todo)).then(function () { return console.log('Stored item!'); }, function (error) { return console.error('Error storing item', error); });
                         return [4 /*yield*/, this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise()];

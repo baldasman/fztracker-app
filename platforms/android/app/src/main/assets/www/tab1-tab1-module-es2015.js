@@ -21984,12 +21984,6 @@ let Tab1Page = class Tab1Page {
             console.log('update status icon', this.connected);
             this.changeRef.detectChanges();
         }, 5000);
-        // TODO: move to config save
-        this.nativeStorage.setItem('sensorId', 'PHONE_1' /* variable */)
-            .then(() => console.log('Stored sensorId', 'PHONE_1' /* variable */), error => console.error('Error storing location', error));
-        this.nativeStorage.setItem('location', 'CF' /* variable */)
-            .then(() => console.log('Stored location', 'CF' /* variable */), error => console.error('Error storing location', error));
-        // end
         this.nfc.addNdefListener(() => {
             console.log('successfully attached ndef listener');
         }, (err) => {
@@ -22104,30 +22098,12 @@ let Tab1Page = class Tab1Page {
         });
     }
     logAccess() {
-        // Get location
-        let location = 'LOCALX';
-        this.nativeStorage.getItem('location')
-            .then(data => {
-            console.log('read location from storage', data);
-            if (data) {
-                location = data;
-            }
-        }, error => console.error(error));
-        // Get sensorId
-        let sensorId = 'BROWSER';
-        this.nativeStorage.getItem('sensorId')
-            .then(data => {
-            console.log('read sensorId from storage', data);
-            if (data) {
-                sensorId = data;
-            }
-        }, error => console.error(error));
         const movement = new _models_entity_movement_model__WEBPACK_IMPORTED_MODULE_7__["EntityMovementModel"]();
-        movement.location = location;
+        movement.location = this.apiService.getLocation();
         movement.manual = true;
         movement.cardNumber = this.cardNumber;
         movement.inOut = true;
-        movement.sensor = sensorId;
+        movement.sensor = this.apiService.getSensorId();
         movement.cardId = this.cardId;
         movement.plate = this.selectedResource;
         const card = this.apiService.addMovement(movement);

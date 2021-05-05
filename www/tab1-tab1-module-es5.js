@@ -22003,12 +22003,6 @@ var Tab1Page = /** @class */ (function () {
             console.log('update status icon', _this.connected);
             _this.changeRef.detectChanges();
         }, 5000);
-        // TODO: move to config save
-        this.nativeStorage.setItem('sensorId', 'PHONE_1' /* variable */)
-            .then(function () { return console.log('Stored sensorId', 'PHONE_1' /* variable */); }, function (error) { return console.error('Error storing location', error); });
-        this.nativeStorage.setItem('location', 'CF' /* variable */)
-            .then(function () { return console.log('Stored location', 'CF' /* variable */); }, function (error) { return console.error('Error storing location', error); });
-        // end
         this.nfc.addNdefListener(function () {
             console.log('successfully attached ndef listener');
         }, function (err) {
@@ -22149,30 +22143,12 @@ var Tab1Page = /** @class */ (function () {
     };
     Tab1Page.prototype.logAccess = function () {
         var _this = this;
-        // Get location
-        var location = 'LOCALX';
-        this.nativeStorage.getItem('location')
-            .then(function (data) {
-            console.log('read location from storage', data);
-            if (data) {
-                location = data;
-            }
-        }, function (error) { return console.error(error); });
-        // Get sensorId
-        var sensorId = 'BROWSER';
-        this.nativeStorage.getItem('sensorId')
-            .then(function (data) {
-            console.log('read sensorId from storage', data);
-            if (data) {
-                sensorId = data;
-            }
-        }, function (error) { return console.error(error); });
         var movement = new _models_entity_movement_model__WEBPACK_IMPORTED_MODULE_7__["EntityMovementModel"]();
-        movement.location = location;
+        movement.location = this.apiService.getLocation();
         movement.manual = true;
         movement.cardNumber = this.cardNumber;
         movement.inOut = true;
-        movement.sensor = sensorId;
+        movement.sensor = this.apiService.getSensorId();
         movement.cardId = this.cardId;
         movement.plate = this.selectedResource;
         var card = this.apiService.addMovement(movement);
