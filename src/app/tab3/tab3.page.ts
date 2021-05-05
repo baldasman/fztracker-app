@@ -76,7 +76,8 @@ export class Tab3Page {
     );
 
 const info = await this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise();
-    environment.token = info.token;
+  
+    this.apiService.setToken(info.token);
     this.nativeStorage.setItem("token", info.token).then(
       () => console.log('Stored item!', info),
       error => console.error('Error storing item', error, info)
