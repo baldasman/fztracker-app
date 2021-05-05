@@ -710,9 +710,13 @@ let ApiService = class ApiService {
         this.connected = false;
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
         this.statusTimer = null;
+        this.token = null;
+        this.api = null;
         this.headers = this.headers.append('Content-Type', 'application/json');
         this.headers = this.headers.append('Accept', 'application/json');
         this.headers = this.headers.append('Authorization', 'Bearer ' + src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token);
+        this.token = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token;
+        this.api = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api;
         this.checkStatus();
         console.log('setup status timer');
         this.statusTimer = setInterval(() => { this.checkStatus(); }, 30000);
@@ -720,20 +724,27 @@ let ApiService = class ApiService {
             console.log('get iten config', data);
             if (data) {
                 const config = JSON.parse(data);
-                src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api = config.ip;
-                console.log('update ip', src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api);
+                this.api = config.ip;
+                console.log('update ip', this.api);
             }
             ;
         }, error => console.error(error));
         this.nativeStorage.getItem("token").then(data => {
             console.log('get iten token', data);
             if (data) {
-                src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token = data;
-                console.log('update token', src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token);
+                this.token = data;
+                this.headers.set('Authorization', 'Bearer ' + this.token);
+                console.log('update token', this.token);
             }
             ;
         }, error => console.error(error));
     }
+    getToken() { return this.token; }
+    setToken(token) {
+        this.token = token;
+        this.headers.set('Authorization', 'Bearer ' + this.token);
+    }
+    getApi() { return this.api; }
     getCardInfo(cardNumber, cardId) {
         console.log('getCardInfo:', cardNumber);
         let params = {};

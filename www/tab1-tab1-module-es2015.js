@@ -22027,7 +22027,7 @@ let Tab1Page = class Tab1Page {
     }
     searchCardByNumber() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.cardNumber = null;
+            this.cardNumber = "0";
             this.cardId = null;
             this.color = "";
             const prompt = yield this.alertCtrl.create({

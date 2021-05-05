@@ -433,9 +433,13 @@ var ApiService = /** @class */ (function () {
         this.connected = false;
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
         this.statusTimer = null;
+        this.token = null;
+        this.api = null;
         this.headers = this.headers.append('Content-Type', 'application/json');
         this.headers = this.headers.append('Accept', 'application/json');
         this.headers = this.headers.append('Authorization', 'Bearer ' + src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token);
+        this.token = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token;
+        this.api = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api;
         this.checkStatus();
         console.log('setup status timer');
         this.statusTimer = setInterval(function () { _this.checkStatus(); }, 30000);
@@ -443,20 +447,27 @@ var ApiService = /** @class */ (function () {
             console.log('get iten config', data);
             if (data) {
                 var config = JSON.parse(data);
-                src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api = config.ip;
-                console.log('update ip', src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api);
+                _this.api = config.ip;
+                console.log('update ip', _this.api);
             }
             ;
         }, function (error) { return console.error(error); });
         this.nativeStorage.getItem("token").then(function (data) {
             console.log('get iten token', data);
             if (data) {
-                src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token = data;
-                console.log('update token', src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].token);
+                _this.token = data;
+                _this.headers.set('Authorization', 'Bearer ' + _this.token);
+                console.log('update token', _this.token);
             }
             ;
         }, function (error) { return console.error(error); });
     }
+    ApiService.prototype.getToken = function () { return this.token; };
+    ApiService.prototype.setToken = function (token) {
+        this.token = token;
+        this.headers.set('Authorization', 'Bearer ' + this.token);
+    };
+    ApiService.prototype.getApi = function () { return this.api; };
     ApiService.prototype.getCardInfo = function (cardNumber, cardId) {
         console.log('getCardInfo:', cardNumber);
         var params = {};

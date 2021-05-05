@@ -131,7 +131,7 @@ let Tab3Page = class Tab3Page {
             // utilizar estes dados para cadastrar equipamento  e guardar local de registo. 
             this.nativeStorage.setItem("config", JSON.stringify(this.todo)).then(() => console.log('Stored item!'), error => console.error('Error storing item', error));
             const info = yield this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise();
-            src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].token = info.token;
+            this.apiService.setToken(info.token);
             this.nativeStorage.setItem("token", info.token).then(() => console.log('Stored item!', info), error => console.error('Error storing item', error, info));
         });
     }

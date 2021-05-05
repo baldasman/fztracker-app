@@ -22063,7 +22063,7 @@ var Tab1Page = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.cardNumber = null;
+                        this.cardNumber = "0";
                         this.cardId = null;
                         this.color = "";
                         return [4 /*yield*/, this.alertCtrl.create({
