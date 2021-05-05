@@ -84,20 +84,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/nfc/ngx */ "./node_modules/@ionic-native/nfc/ngx/index.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
 
 
 
 
 
 var Tab2Page = /** @class */ (function () {
-    function Tab2Page(httpClient, nfc, ndef, changeRef) {
+    function Tab2Page(httpClient, nfc, ndef, changeRef, apiService) {
         var _this = this;
         this.httpClient = httpClient;
         this.nfc = nfc;
         this.ndef = ndef;
         this.changeRef = changeRef;
-        this.photo = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].api + "/img/default.jpg";
+        this.apiService = apiService;
         this.rankName = "Posto e Nome";
         this.polo = "Polo";
         this.gdh = "---";
@@ -110,6 +110,7 @@ var Tab2Page = /** @class */ (function () {
             var uid = _this.nfc.bytesToHexString(event.tag.id);
             _this.logAccess(uid);
         });
+        this.photo = this.apiService.getApi() + "/img/default.jpg";
     }
     Tab2Page.prototype.logAccess = function (cardId) {
         var _this = this;
@@ -130,7 +131,7 @@ var Tab2Page = /** @class */ (function () {
         headers = headers.append('Authorization', 'Bearer ' + token);
         console.log('logAccess: ', params, headers);
         var options = { headers: headers };
-        var card = this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].api + '/fztracker/v1/entities/movement', params, options);
+        var card = this.httpClient.post(this.apiService.getApi() + '/fztracker/v1/entities/movement', params, options);
         card.subscribe(function (response) {
             var data = response;
             console.log('my data: ', data);
@@ -147,7 +148,8 @@ var Tab2Page = /** @class */ (function () {
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
         { type: _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["NFC"] },
         { type: _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["Ndef"] },
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"] }
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"] },
+        { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
     ]; };
     Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -155,7 +157,7 @@ var Tab2Page = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab2/tab2.page.html"),
             styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["NFC"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["Ndef"], _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["NFC"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["Ndef"], _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"], _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"]])
     ], Tab2Page);
     return Tab2Page;
 }());

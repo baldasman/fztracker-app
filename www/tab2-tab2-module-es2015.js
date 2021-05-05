@@ -81,19 +81,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/nfc/ngx */ "./node_modules/@ionic-native/nfc/ngx/index.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
 
 
 
 
 
 let Tab2Page = class Tab2Page {
-    constructor(httpClient, nfc, ndef, changeRef) {
+    constructor(httpClient, nfc, ndef, changeRef, apiService) {
         this.httpClient = httpClient;
         this.nfc = nfc;
         this.ndef = ndef;
         this.changeRef = changeRef;
-        this.photo = `${src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].api}/img/default.jpg`;
+        this.apiService = apiService;
         this.rankName = "Posto e Nome";
         this.polo = "Polo";
         this.gdh = "---";
@@ -106,6 +106,7 @@ let Tab2Page = class Tab2Page {
             let uid = this.nfc.bytesToHexString(event.tag.id);
             this.logAccess(uid);
         });
+        this.photo = `${this.apiService.getApi()}/img/default.jpg`;
     }
     logAccess(cardId) {
         // Call API
@@ -125,7 +126,7 @@ let Tab2Page = class Tab2Page {
         headers = headers.append('Authorization', 'Bearer ' + token);
         console.log('logAccess: ', params, headers);
         let options = { headers: headers };
-        const card = this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].api + '/fztracker/v1/entities/movement', params, options);
+        const card = this.httpClient.post(this.apiService.getApi() + '/fztracker/v1/entities/movement', params, options);
         card.subscribe(response => {
             const data = response;
             console.log('my data: ', data);
@@ -143,7 +144,8 @@ Tab2Page.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
     { type: _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["NFC"] },
     { type: _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["Ndef"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"] }
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"] },
+    { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
 ];
 Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -151,7 +153,7 @@ Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab2/tab2.page.html"),
         styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["NFC"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["Ndef"], _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["NFC"], _ionic_native_nfc_ngx__WEBPACK_IMPORTED_MODULE_3__["Ndef"], _angular_core__WEBPACK_IMPORTED_MODULE_2__["ChangeDetectorRef"], _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"]])
 ], Tab2Page);
 
 

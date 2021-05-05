@@ -80,9 +80,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/native-storage/ngx */ "./node_modules/@ionic-native/native-storage/ngx/index.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
-
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
 
 
 
@@ -137,7 +135,7 @@ var Tab3Page = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api = this.todo.ip;
+                        this.apiService.setApi(this.todo.ip);
                         console.log("teste salvar", this.todo);
                         // utilizar estes dados para cadastrar equipamento  e guardar local de registo. 
                         this.nativeStorage.setItem("config", JSON.stringify(this.todo)).then(function () { return console.log('Stored item!'); }, function (error) { return console.error('Error storing item', error); });
@@ -153,7 +151,7 @@ var Tab3Page = /** @class */ (function () {
     };
     Tab3Page.ctorParameters = function () { return [
         { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"] },
-        { type: _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
+        { type: _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] }
     ]; };
     Tab3Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -161,7 +159,7 @@ var Tab3Page = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./tab3.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab3/tab3.page.html"),
             styles: [__webpack_require__(/*! ./tab3.page.scss */ "./src/app/tab3/tab3.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"], _services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"], _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]])
     ], Tab3Page);
     return Tab3Page;
 }());

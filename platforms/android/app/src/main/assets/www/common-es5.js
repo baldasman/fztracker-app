@@ -426,10 +426,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ApiService = /** @class */ (function () {
-    function ApiService(httpClient, nativeStorage) {
+    function ApiService(httpClient, nativeStorage, apiService) {
         var _this = this;
         this.httpClient = httpClient;
         this.nativeStorage = nativeStorage;
+        this.apiService = apiService;
         this.connected = false;
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
         this.statusTimer = null;
@@ -467,6 +468,9 @@ var ApiService = /** @class */ (function () {
         this.token = token;
         this.headers.set('Authorization', 'Bearer ' + this.token);
     };
+    ApiService.prototype.setApi = function (api) {
+        this.api = api;
+    };
     ApiService.prototype.getApi = function () { return this.api; };
     ApiService.prototype.getCardInfo = function (cardNumber, cardId) {
         console.log('getCardInfo:', cardNumber);
@@ -481,16 +485,16 @@ var ApiService = /** @class */ (function () {
             headers: this.headers,
             params: params
         };
-        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/fztracker/entities/v1', options);
+        return this.httpClient.get(this.api + '/fztracker/entities/v1', options);
     };
     ApiService.prototype.addMovement = function (movement) {
         console.log('addMovement:', movement);
         var options = { headers: this.headers };
-        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/fztracker/entities/v1/movement', movement, options);
+        return this.httpClient.post(this.api + '/fztracker/entities/v1/movement', movement, options);
     };
     ApiService.prototype.signIn = function (username, password) {
         // const url = new UrlModel(this.apiUrl).setPath('auth/v1/signin');
-        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/auth/v1/signin', { authId: username, password: password, sessionType: 'portal' })
+        return this.httpClient.post(this.api + '/auth/v1/signin', { authId: username, password: password, sessionType: 'portal' })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) { return response.data; }));
     };
     ApiService.prototype.checkStatus = function () {
@@ -499,7 +503,7 @@ var ApiService = /** @class */ (function () {
         var options = {
             headers: this.headers
         };
-        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/admin/status', options).subscribe(function (response) {
+        return this.httpClient.get(this.api + '/admin/status', options).subscribe(function (response) {
             console.log('STATUS: OK');
             _this.connected = true;
         }, function (error) {
@@ -509,11 +513,12 @@ var ApiService = /** @class */ (function () {
     };
     ApiService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
-        { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] }
+        { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
+        { type: ApiService }
     ]; };
     ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({ providedIn: 'root' }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], ApiService])
     ], ApiService);
     return ApiService;
 }());

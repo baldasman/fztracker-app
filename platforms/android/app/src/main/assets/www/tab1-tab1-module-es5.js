@@ -21963,11 +21963,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _deposit_modal_deposit_modal_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../deposit-modal/deposit-modal.component */ "./src/app/deposit-modal/deposit-modal.component.ts");
-/* harmony import */ var _models_entity_movement_model__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../models/entity-movement.model */ "./src/app/models/entity-movement.model.ts");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
-
+/* harmony import */ var _deposit_modal_deposit_modal_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../deposit-modal/deposit-modal.component */ "./src/app/deposit-modal/deposit-modal.component.ts");
+/* harmony import */ var _models_entity_movement_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../models/entity-movement.model */ "./src/app/models/entity-movement.model.ts");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
 
 
 
@@ -22032,7 +22030,7 @@ var Tab1Page = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.modalCtrl.create({
-                            component: _deposit_modal_deposit_modal_component__WEBPACK_IMPORTED_MODULE_7__["DepositModalComponent"],
+                            component: _deposit_modal_deposit_modal_component__WEBPACK_IMPORTED_MODULE_6__["DepositModalComponent"],
                         })];
                     case 1:
                         modal = _a.sent();
@@ -22127,7 +22125,7 @@ var Tab1Page = /** @class */ (function () {
             console.log('a entidade' + entity);
             _this.cardInfo = entity.cardNumber;
             _this.color = '';
-            _this.photo = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].api + "/assets/userPhotos/" + entity.serial + ".bmp";
+            _this.photo = _this.apiService.getApi() + "/assets/userPhotos/" + entity.serial + ".bmp";
             _this.rankName = "" + entity.name;
             //this.polo = entity.location;
             // Load plates
@@ -22169,7 +22167,7 @@ var Tab1Page = /** @class */ (function () {
                 sensorId = data;
             }
         }, function (error) { return console.error(error); });
-        var movement = new _models_entity_movement_model__WEBPACK_IMPORTED_MODULE_8__["EntityMovementModel"]();
+        var movement = new _models_entity_movement_model__WEBPACK_IMPORTED_MODULE_7__["EntityMovementModel"]();
         movement.location = location;
         movement.manual = true;
         movement.cardNumber = this.cardNumber;
@@ -22193,7 +22191,7 @@ var Tab1Page = /** @class */ (function () {
         { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"] },
         { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
-        { type: _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"] }
+        { type: _services_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"] }
     ]; };
     Tab1Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -22207,7 +22205,7 @@ var Tab1Page = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"],
             _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_2__["NativeStorage"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"],
-            _services_api_service__WEBPACK_IMPORTED_MODULE_9__["ApiService"]])
+            _services_api_service__WEBPACK_IMPORTED_MODULE_8__["ApiService"]])
     ], Tab1Page);
     return Tab1Page;
 }());

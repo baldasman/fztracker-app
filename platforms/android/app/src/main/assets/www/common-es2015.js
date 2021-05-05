@@ -704,9 +704,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ApiService = class ApiService {
-    constructor(httpClient, nativeStorage) {
+    constructor(httpClient, nativeStorage, apiService) {
         this.httpClient = httpClient;
         this.nativeStorage = nativeStorage;
+        this.apiService = apiService;
         this.connected = false;
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
         this.statusTimer = null;
@@ -744,6 +745,9 @@ let ApiService = class ApiService {
         this.token = token;
         this.headers.set('Authorization', 'Bearer ' + this.token);
     }
+    setApi(api) {
+        this.api = api;
+    }
     getApi() { return this.api; }
     getCardInfo(cardNumber, cardId) {
         console.log('getCardInfo:', cardNumber);
@@ -758,16 +762,16 @@ let ApiService = class ApiService {
             headers: this.headers,
             params
         };
-        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/fztracker/entities/v1', options);
+        return this.httpClient.get(this.api + '/fztracker/entities/v1', options);
     }
     addMovement(movement) {
         console.log('addMovement:', movement);
         let options = { headers: this.headers };
-        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/fztracker/entities/v1/movement', movement, options);
+        return this.httpClient.post(this.api + '/fztracker/entities/v1/movement', movement, options);
     }
     signIn(username, password) {
         // const url = new UrlModel(this.apiUrl).setPath('auth/v1/signin');
-        return this.httpClient.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/auth/v1/signin', { authId: username, password, sessionType: 'portal' })
+        return this.httpClient.post(this.api + '/auth/v1/signin', { authId: username, password, sessionType: 'portal' })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((response) => response.data));
     }
     checkStatus() {
@@ -775,7 +779,7 @@ let ApiService = class ApiService {
         let options = {
             headers: this.headers
         };
-        return this.httpClient.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].api + '/admin/status', options).subscribe(response => {
+        return this.httpClient.get(this.api + '/admin/status', options).subscribe(response => {
             console.log('STATUS: OK');
             this.connected = true;
         }, error => {
@@ -786,11 +790,12 @@ let ApiService = class ApiService {
 };
 ApiService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
-    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] }
+    { type: _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"] },
+    { type: ApiService }
 ];
 ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({ providedIn: 'root' }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _ionic_native_native_storage_ngx__WEBPACK_IMPORTED_MODULE_3__["NativeStorage"], ApiService])
 ], ApiService);
 
 
