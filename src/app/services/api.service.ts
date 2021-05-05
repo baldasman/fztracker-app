@@ -10,21 +10,19 @@ import { EntityMovementModel } from '../models/entity-movement.model';
 export class ApiService {
 
   connected: boolean = false;
-  private headers = new HttpHeaders();
+  private headers = null;
   private statusTimer = null;
   private token = null;
   private api = null;
 
   constructor(public httpClient: HttpClient, private nativeStorage: NativeStorage, private apiService: ApiService) {
-    this.headers = this.headers.append('Content-Type', 'application/json');
-    this.headers = this.headers.append('Accept', 'application/json');
-    this.headers = this.headers.append('Authorization', 'Bearer ' + environment.token);
-
     this.token = environment.token;
     this.api = environment.api;
+
+    this.setHeaders();
+
     this.checkStatus();
 
-    console.log('setup status timer');
     this.statusTimer = setInterval(() => { this.checkStatus(); }, 30000);
 
     this.nativeStorage.getItem("config").then(
@@ -45,29 +43,39 @@ export class ApiService {
         console.log('get iten token', data);
 
         if (data) {
-
           this.token = data;
-          this.headers.set('Authorization', 'Bearer ' + this.token);
           console.log('update token', this.token);
+
+          this.setHeaders();
         };
       },
       error => console.error(error)
     );
-
-
-
   }
 
-  getToken() { return this.token; }
+  setHeaders() {
+    this.headers = new HttpHeaders();
+    this.headers = this.headers.append('Content-Type', 'application/json');
+    this.headers = this.headers.append('Accept', 'application/json');
+    this.headers = this.headers.append('Authorization', 'Bearer ' + this.token);
+  }
 
-  setToken(token:string) { 
-    this.token=token;
-    this.headers.set('Authorization', 'Bearer ' + this.token); }
+  getToken() {
+    return this.token;
+  }
 
-    setApi(api:string) { 
-      this.api=api; }
+  setToken(token: string) {
+    this.token = token;
+    this.headers.set('Authorization', 'Bearer ' + this.token);
+  }
 
-  getApi() { return this.api; }
+  setApi(api: string) {
+    this.api = api;
+  }
+
+  getApi() { 
+    return this.api; 
+  }
 
   getCardInfo(cardNumber: string, cardId: string): Observable<object> {
     console.log('getCardInfo:', cardNumber);

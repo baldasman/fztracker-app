@@ -13,7 +13,7 @@ export class Tab3Page {
   todo = {
     local: '',
     movelName: '',
-    ip:'',
+    ip: '',
     mail: '',
     pass: '',
   };
@@ -23,51 +23,40 @@ export class Tab3Page {
   ngOnInit() {
     document.getElementById('123').hidden = true;
     document.getElementById('122').hidden = false;
-
-
   };
 
-
   async login(form) {
-
-
-    
-
     if ((Object.entries(form.value).toString()) == "email,1,password,2") {
       console.log("correcto", form)
       document.getElementById('123').hidden = false;
       document.getElementById('122').hidden = true;
-     
+
       this.nativeStorage.getItem("config").then(
         data => {
           console.log(data);
-  
+
           if (data) {
             this.todo = JSON.parse(data);
           };
         },
         error => console.error(error)
       );
-     
-     
+
+
       setTimeout(function () {
         console.log("agora")
-        
+
         document.getElementById('123').hidden = true;
         document.getElementById('122').hidden = false;
         form.reset();
 
       }, 30000);
     };
-
-
-
-
   }
 
   async saveMovel() {
-  
-  this.apiService.setApi(this.todo.ip);
+
+    this.apiService.setApi(this.todo.ip);
     console.log("teste salvar", this.todo)
 
     // utilizar estes dados para cadastrar equipamento  e guardar local de registo. 
@@ -76,19 +65,14 @@ export class Tab3Page {
       error => console.error('Error storing item', error)
     );
 
-const info = await this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise();
-  
+    const info = await this.apiService.signIn(this.todo.mail, this.todo.pass).toPromise();
+
     this.apiService.setToken(info.token);
+    
     this.nativeStorage.setItem("token", info.token).then(
       () => console.log('Stored item!', info),
       error => console.error('Error storing item', error, info)
     );
-
   }
 
-
-
-
 }
-
-
