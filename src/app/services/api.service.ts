@@ -15,7 +15,7 @@ export class ApiService {
   private token = null;
   private api = null;
 
-  constructor(public httpClient: HttpClient, private nativeStorage: NativeStorage) {
+  constructor(public httpClient: HttpClient, private nativeStorage: NativeStorage, private apiService: ApiService) {
     this.headers = this.headers.append('Content-Type', 'application/json');
     this.headers = this.headers.append('Accept', 'application/json');
     this.headers = this.headers.append('Authorization', 'Bearer ' + environment.token);
@@ -64,6 +64,9 @@ export class ApiService {
     this.token=token;
     this.headers.set('Authorization', 'Bearer ' + this.token); }
 
+    setApi(api:string) { 
+      this.api=api; }
+
   getApi() { return this.api; }
 
   getCardInfo(cardNumber: string, cardId: string): Observable<object> {
@@ -84,7 +87,7 @@ export class ApiService {
       params
     };
 
-    return this.httpClient.get(environment.api + '/fztracker/entities/v1', options);
+    return this.httpClient.get(this.api + '/fztracker/entities/v1', options);
   }
 
   addMovement(movement: EntityMovementModel): Observable<object> {
@@ -92,12 +95,12 @@ export class ApiService {
 
     let options = { headers: this.headers };
 
-    return this.httpClient.post(environment.api + '/fztracker/entities/v1/movement', movement, options);
+    return this.httpClient.post(this.api + '/fztracker/entities/v1/movement', movement, options);
   }
 
   signIn(username: string, password: string): Observable<{ token: string }> {
     // const url = new UrlModel(this.apiUrl).setPath('auth/v1/signin');
-    return this.httpClient.post(environment.api + '/auth/v1/signin', { authId: username, password, sessionType: 'portal' })
+    return this.httpClient.post(this.api + '/auth/v1/signin', { authId: username, password, sessionType: 'portal' })
       .pipe(
         map((response: { data: any }) => response.data)
       );
@@ -110,7 +113,7 @@ export class ApiService {
     let options = {
       headers: this.headers
     };
-    return this.httpClient.get(environment.api + '/admin/status', options).subscribe(response => {
+    return this.httpClient.get(this.api + '/admin/status', options).subscribe(response => {
       console.log('STATUS: OK');
       this.connected = true;
     }, error => {

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Ndef, NFC } from '@ionic-native/nfc/ngx';
 import { environment } from 'src/environments/environment';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-tab2',
@@ -9,12 +10,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  photo: string = `${environment.api}/img/default.jpg`;
+ 
   rankName: string = "Posto e Nome";
   polo: string = "Polo";
   gdh: string = "---";
-
-  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef) {
+  photo: string;
+  constructor(public httpClient: HttpClient, private nfc: NFC, private ndef: Ndef, private changeRef: ChangeDetectorRef, private apiService: ApiService) {
     this.nfc.addNdefListener(() => {
       console.log('successfully attached ndef listener');
     }, (err) => {
@@ -24,6 +25,8 @@ export class Tab2Page {
       let uid = this.nfc.bytesToHexString(event.tag.id);
       this.logAccess(uid);
     });
+
+    this.photo = `${this.apiService.getApi()}/img/default.jpg`;
   }
 
   logAccess(cardId: any) {
@@ -48,7 +51,7 @@ export class Tab2Page {
     headers = headers.append('Authorization', 'Bearer ' + token);
     console.log('logAccess: ', params, headers);
     let options = { headers: headers };
-    const card = this.httpClient.post(environment.api + '/fztracker/v1/entities/movement', params, options);
+    const card = this.httpClient.post(this.apiService.getApi() + '/fztracker/v1/entities/movement', params, options);
     card.subscribe(response => {
       const data: any = response
       console.log('my data: ', data);

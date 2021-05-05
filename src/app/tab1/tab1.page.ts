@@ -162,7 +162,7 @@ export class Tab1Page {
       console.log('a entidade' +entity)
       this.cardInfo = entity.cardNumber;
       this.color = '';
-      this.photo = `${environment.api}/assets/userPhotos/${entity.serial}.bmp`;
+      this.photo = `${this.apiService.getApi()}/assets/userPhotos/${entity.serial}.bmp`;
       this.rankName = `${entity.name}`;
       //this.polo = entity.location;
 

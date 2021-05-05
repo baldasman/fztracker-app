@@ -66,7 +66,8 @@ export class Tab3Page {
   }
 
   async saveMovel() {
-  environment.api = this.todo.ip;
+  
+  this.apiService.setApi(this.todo.ip);
     console.log("teste salvar", this.todo)
 
     // utilizar estes dados para cadastrar equipamento  e guardar local de registo. 
