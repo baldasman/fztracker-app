@@ -44,21 +44,7 @@ export class Tab1Page {
       console.log('update status icon', this.connected);
       this.changeRef.detectChanges();
     }, 5000);
-
-    // TODO: move to config save
-    this.nativeStorage.setItem('sensorId', 'PHONE_1'/* variable */)
-      .then(
-        () => console.log('Stored sensorId', 'PHONE_1'/* variable */),
-        error => console.error('Error storing location', error)
-      );
-
-    this.nativeStorage.setItem('location', 'CF'/* variable */)
-      .then(
-        () => console.log('Stored location', 'CF'/* variable */),
-        error => console.error('Error storing location', error)
-      );
-    // end
-
+    
     this.nfc.addNdefListener(() => {
       console.log('successfully attached ndef listener');
     }, (err) => {

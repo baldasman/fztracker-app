@@ -14,6 +14,8 @@ export class ApiService {
   private statusTimer = null;
   private token = null;
   private api = null;
+  private sensorId = null;
+  private location = null;
 
   constructor(public httpClient: HttpClient, private nativeStorage: NativeStorage, private apiService: ApiService) {
     this.token = environment.token;
@@ -32,7 +34,10 @@ export class ApiService {
         if (data) {
           const config = JSON.parse(data);
           this.api = config.ip;
-          console.log('update ip', this.api);
+          this.sensorId = config.movelName;
+          this.location = config.local;
+          
+          console.log(`update config: api=[${this.api}] sensorId=[${this.sensorId}] location=[${this.location}]`);
         };
       },
       error => console.error(error)
@@ -59,6 +64,12 @@ export class ApiService {
     this.headers = this.headers.append('Accept', 'application/json');
     this.headers = this.headers.append('Authorization', 'Bearer ' + this.token);
   }
+  
+  setConfig(config) {
+    this.api = config.ip;
+    this.sensorId = config.movelName;
+    this.location = config.local;
+  }
 
   getToken() {
     return this.token;
@@ -68,10 +79,6 @@ export class ApiService {
     this.token = token;
 
     this.setHeaders();
-  }
-
-  setApi(api: string) {
-    this.api = api;
   }
 
   getApi() {
