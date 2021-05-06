@@ -22115,6 +22115,9 @@ var Tab1Page = /** @class */ (function () {
                 _this.changeRef.detectChanges();
                 return;
             }
+            console.log(rawData.data);
+            console.log(rawData.data.entities);
+            console.log(rawData.data.entities[0]);
             var entity = rawData.data.entities[0];
             console.log('a entidade' + entity);
             _this.cardInfo = entity.cardNumber;
