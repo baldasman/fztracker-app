@@ -143,8 +143,7 @@ export class Tab1Page {
         this.changeRef.detectChanges();
         return;
       }
-      console.log(rawData.data);
-      console.log(rawData.data.entities);
+      
       console.log(rawData.data.entities[0]);
 
       
