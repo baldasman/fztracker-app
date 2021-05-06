@@ -151,9 +151,11 @@ export class Tab1Page {
       const entity = rawData.data.entities[0];
       console.log('a entidade' + entity);
       this.cardInfo = entity.cardNumber;
+      this.cardId = entity.cardId;
       this.color = '';
       this.photo = `${this.apiService.getApi()}/assets/userPhotos/${entity.serial}.bmp`;
       this.rankName = `${entity.name}`;
+      
       //this.polo = entity.location;
 
       // Load plates
