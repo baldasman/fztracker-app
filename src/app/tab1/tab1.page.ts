@@ -143,7 +143,11 @@ export class Tab1Page {
         this.changeRef.detectChanges();
         return;
       }
-      console.log();
+      console.log(rawData.data);
+      console.log(rawData.data.entities);
+      console.log(rawData.data.entities[0]);
+
+      
       const entity = rawData.data.entities[0];
       console.log('a entidade' +entity);
       this.cardInfo = entity.cardNumber;
