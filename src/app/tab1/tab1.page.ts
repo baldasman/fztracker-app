@@ -25,7 +25,7 @@ export class Tab1Page {
   color: string = ""
   resources = [];
   selectedResource: string = 'NOCAR';
-
+  cardcontrol: string;
   private statusTimer = null;
 
   constructor(
@@ -89,6 +89,7 @@ export class Tab1Page {
     this.cardId = null;
     this.color = "";
 
+
     const prompt = await this.alertCtrl.create({
       header: 'Número do Cartão',
       message: 'Introduz o número do cartão',
@@ -115,7 +116,7 @@ export class Tab1Page {
               this.cardId = null;
               return;
             }
-
+            this.cardcontrol =  data.cardnumber
             this.cardNumber = data.cardnumber;
 
             // Call API
@@ -133,12 +134,13 @@ export class Tab1Page {
     const cardInfoResponse = this.apiService.getCardInfo(this.cardNumber, this.cardId);
     cardInfoResponse.subscribe(response => {
       const rawData: any = response;
+      const entity = rawData.data.entities[0];
 
-      if (rawData.data.records < 1) {
+      if (this.cardcontrol != entity.cardNumber) {
         this.cardInfo = "Número inválido!";
         this.color = "danger";
-       // this.cardNumber = null;
-       // this.cardId = null;
+       //  this.cardNumber = null;
+     //    this.cardId = null;
 
         this.changeRef.detectChanges();
         return;
@@ -147,9 +149,10 @@ export class Tab1Page {
       console.log(rawData.data.entities[0]);
 
       
-      const entity = rawData.data.entities[0];
+     
       console.log('a entidade' + entity);
       this.cardInfo = entity.cardNumber;
+
       this.cardId = entity.cardId;
       this.color = '';
       this.photo = `${this.apiService.getApi()}/assets/userPhotos/${entity.serial}.bmp`;
