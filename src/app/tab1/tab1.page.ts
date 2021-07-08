@@ -56,7 +56,8 @@ export class Tab1Page {
 
       // Search card by id
       this.cardId = this.nfc.bytesToHexString(event.tag.id);
-      // this.cardNumber = null;
+      this.serial =null;
+      this.cardNumber = null;
       //  this.cardId = '0412FD1AE66C81';
       console.log('nfc', this.cardId);
       this.searchCard();

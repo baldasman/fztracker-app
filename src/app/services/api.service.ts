@@ -93,7 +93,7 @@ export class ApiService {
     return this.sensorId;
   }
 
-  getCardInfo(cardNumber: string, cardId: string): Observable<object> {
+  getCardInfo(cardNumber: string, cardId: string, serial:string): Observable<object> {
     console.log('getCardInfo:', cardNumber);
 
     let params = {};
@@ -105,7 +105,9 @@ export class ApiService {
     if (cardId) {
       params = { ...params, cardId };
     }
-
+    if (serial) {
+      params = { ...params, serial };
+    }
     let options = {
       headers: this.headers,
       params
