@@ -17,6 +17,7 @@ export class Tab1Page {
   connected: boolean = false;
   cardNumber: string = null;
   cardId: string = null;
+  serial: string = null;
   photo: string = "/assets/default.jpg";
   rankName: string = "Posto e Nome";
   polo: string = "Polo";
@@ -44,20 +45,20 @@ export class Tab1Page {
       console.log('update status icon', this.connected);
       this.changeRef.detectChanges();
     }, 5000);
-    
+
     this.nfc.addNdefListener(() => {
       console.log('successfully attached ndef listener');
     }, (err) => {
       console.log('error attaching ndef listener', err);
     }).subscribe((event) => {
       console.log('received ndef message. the tag contains: ', event.tag);
-      
+
 
       // Search card by id
       this.cardId = this.nfc.bytesToHexString(event.tag.id);
-     // this.cardNumber = null;
-    //  this.cardId = '0412FD1AE66C81';
-    console.log('nfc', this.cardId);
+      // this.cardNumber = null;
+      //  this.cardId = '0412FD1AE66C81';
+      console.log('nfc', this.cardId);
       this.searchCard();
     });
   }
@@ -106,18 +107,35 @@ export class Tab1Page {
           handler: data => {
           }
         },
+
         {
           text: 'Pesquisar',
           handler: data => {
-            if (data.cardnumber.length != 5) {
-              this.cardInfo = "Número inválido!";
-              this.color = "danger";
+
+            const x: string = data.cardnumber;
+
+            if (x.toLowerCase().startsWith("m") || x.toLowerCase().startsWith("a") || x.toLowerCase().startsWith("c") || x.toLowerCase().startsWith("v")) {
+
+              console.log("cartao");
+              this.cardcontrol = data.cardnumber;
+              this.cardNumber = data.cardnumber;
+              this.serial = null;
+            } else {
+              this.serial = data.cardnumber; //todo uma ou outra
+              this.cardcontrol = null;
               this.cardNumber = null;
-              this.cardId = null;
-              return;
             }
-            this.cardcontrol =  data.cardnumber
-            this.cardNumber = data.cardnumber;
+
+            /*   if (data.cardnumber.length != 5) {
+  
+  
+                this.cardInfo = "Número inválido!";
+                this.color = "danger";
+                this.cardNumber = null;
+                this.cardId = null;
+                return;
+              } */
+
 
             // Call API
             this.searchCard();
@@ -131,7 +149,7 @@ export class Tab1Page {
 
   private searchCard() {
     // Call API
-    const cardInfoResponse = this.apiService.getCardInfo(this.cardNumber, this.cardId);
+    const cardInfoResponse = this.apiService.getCardInfo(this.cardNumber, this.cardId, this.serial);
     cardInfoResponse.subscribe(response => {
       const rawData: any = response;
       const entity = rawData.data.entities[0];
@@ -139,17 +157,17 @@ export class Tab1Page {
       if (this.cardcontrol != entity.cardNumber) {
         this.cardInfo = "Número inválido!";
         this.color = "danger";
-       //  this.cardNumber = null;
-     //    this.cardId = null;
+        //  this.cardNumber = null;
+        //    this.cardId = null;
 
         this.changeRef.detectChanges();
         return;
       }
-      
+
       console.log(rawData.data.entities[0]);
 
-      
-     
+
+
       console.log('a entidade' + entity);
       this.cardInfo = entity.cardNumber;
 
@@ -157,7 +175,7 @@ export class Tab1Page {
       this.color = '';
       this.photo = `${this.apiService.getApi()}/assets/userPhotos/${entity.serial}.bmp`;
       this.rankName = `${entity.name}`;
-      
+
       //this.polo = entity.location;
 
       // Load plates
