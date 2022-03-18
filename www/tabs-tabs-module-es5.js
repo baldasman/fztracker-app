@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon style=\"color:green\" name=\"md-arrow-round-up\"></ion-icon>\r\n      <ion-label>Entradas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab2\">\r\n      <ion-icon style=\"color:red\" name=\"md-arrow-round-down\"></ion-icon>\r\n      <ion-label>Saidas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"help\"></ion-icon>\r\n      <ion-label>Outros</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n</ion-tabs>\r\n\r\n"
+module.exports = "<ion-tabs>\r\n\r\n  <ion-tab-bar slot=\"bottom\">\r\n    <ion-tab-button tab=\"tab1\">\r\n      <ion-icon style=\"color:green\" name=\"md-arrow-round-up\"></ion-icon>\r\n      <ion-label>Entradas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab2\">\r\n      <ion-icon style=\"color:red\" name=\"md-arrow-round-down\"></ion-icon>\r\n      <ion-label>Saidas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"tab3\">\r\n      <ion-icon name=\"help\"></ion-icon>\r\n      <ion-label>Outros</ion-label>\r\n    </ion-tab-button>\r\n  </ion-tab-bar>\r\n\r\n  <ion-tab-button tab=\"tab4\">\r\n    <ion-icon name=\"help\"></ion-icon>\r\n    <ion-label>Manual</ion-label>\r\n  </ion-tab-button>\r\n</ion-tab-bar>\r\n\r\n</ion-tabs>\r\n\r\n"
 
 /***/ }),
 
@@ -40,7 +40,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("common"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(function (m) { return m.Tab1PageModule; });
+                            return Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~tab1-tab1-module~tab4-tab4-module"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(function (m) { return m.Tab1PageModule; });
                         }
                     }
                 ]
@@ -51,7 +51,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab2-tab2-module */[__webpack_require__.e("common"), __webpack_require__.e("tab2-tab2-module")]).then(__webpack_require__.bind(null, /*! ../tab2/tab2.module */ "./src/app/tab2/tab2.module.ts")).then(function (m) { return m.Tab2PageModule; });
+                            return __webpack_require__.e(/*! import() | tab2-tab2-module */ "tab2-tab2-module").then(__webpack_require__.bind(null, /*! ../tab2/tab2.module */ "./src/app/tab2/tab2.module.ts")).then(function (m) { return m.Tab2PageModule; });
                         }
                     }
                 ]
@@ -62,7 +62,18 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab3-tab3-module */[__webpack_require__.e("common"), __webpack_require__.e("tab3-tab3-module")]).then(__webpack_require__.bind(null, /*! ../tab3/tab3.module */ "./src/app/tab3/tab3.module.ts")).then(function (m) { return m.Tab3PageModule; });
+                            return __webpack_require__.e(/*! import() | tab3-tab3-module */ "tab3-tab3-module").then(__webpack_require__.bind(null, /*! ../tab3/tab3.module */ "./src/app/tab3/tab3.module.ts")).then(function (m) { return m.Tab3PageModule; });
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'tab4',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () {
+                            return Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~tab1-tab1-module~tab4-tab4-module"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(function (m) { return m.Tab4PageModule; });
                         }
                     }
                 ]

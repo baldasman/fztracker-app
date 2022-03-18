@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">
+      Corpo de Fuzileiros
+      <ion-icon [ngClass]="{'connected': this.connected, 'disconnected': !this.connected}" name="cloud-circle" id="onOff"></ion-icon>
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="face">
+  <ion-card class="face">
+    <ion-card-title class="pad" style="text-align: center;">Aproxime o cartão ou insira codigo</ion-card-title>
+
+    <ion-item style="padding-bottom: 5px;">
+      <ion-label class="ion-text-center" color="{{color}}">{{ cardInfo }}</ion-label>
+      <ion-icon item-end name="search" (click)="searchCardByNumber()" color="primary"></ion-icon>
+    </ion-item>
+
+    <img [src]="photo" alt="Sem imagem" id="pic" class="center" onerror="this.src='/assets/default.jpg';" />
+    <!-- <img [src]="photo" alt="Sem imagem" id="pic" class="center" onerror="this.src='http://localhost:8100/assets/default.jpg';">
+     -->
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card-content style="padding: 0px;">
+            <p id="polo" style="text-align: center;"><b>
+                <h1>{{ rankName }} </h1>
+              </b></p>
+            <!-- {{ gdh }}-->
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card-content style="padding: 0px;">
+            <ion-list>
+              <ion-item>
+                <ion-label>VIATURA</ion-label>
+                <ion-select [value]="selectedResource" interface="action-sheet">
+                  <ion-select-option *ngFor="let resource of resources" [value]="resource.serial">{{ resource.serial }}
+                  </ion-select-option>
+                  <ion-select-option value="NOCAR">Sem Viatura</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+  <ion-card class="add">
+
+    <ion-card-header class="add" style="padding: 0px;">
+      <div class="add">Adicionar </div>
+
+    </ion-card-header>
+    <ion-card-content class="add">
+
+      <ion-grid class="add">
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-start">
+              <label>{{AddComponent}}</label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-end">
+              <ion-button shape="round" color="success" (click)="openModal()">+</ion-button>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+      <!--                   <ion-button (click)="logAccess('1')" color="success" style="align-items: center">viatura</ion-button>
+              <ion-button color="success" style="align-items: center">visita</ion-button> -->
+
+    </ion-card-content>
+  </ion-card>
+
+  <div class="send" style="text-align: center;">
+    <ion-button shape="round" expand="full" color="primary" (click)="logAccess()">Validar entrada </ion-button>
+  </div>
+</ion-content>
